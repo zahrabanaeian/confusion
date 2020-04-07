@@ -21,7 +21,6 @@ import { Control, LocalForm, Errors } from "react-redux-form";
 const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !val || val.length <= len;
 const minLength = (len) => (val) => val && val.length >= len;
-const isNumber = (val) => !isNaN(Number(val));
 
 class CommentForm extends React.Component {
   constructor(props) {
@@ -59,34 +58,26 @@ class CommentForm extends React.Component {
           <ModalBody>
             <LocalForm onSubmit={(values) => this.handleSubmit(values)}>
               <Row className="form-group">
-                <Label htmlFor="rating" md={2}>
+                <Label htmlFor="rating" md={12}>
                   Rating
                 </Label>
-                <Col>
-                  <Control.text
+                <Col md={12}>
+                  <Control.select
                     model=".rating"
                     id="rating"
                     name="rating"
-                    type="number"
                     className="form-control"
-                    validators={{
-                      required,
-                      isNumber,
-                    }}
-                  />
-                  <Errors
-                    className="text-danger"
-                    model=".rating "
-                    show="touched"
-                    messages={{
-                      required: "Required",
-                      isNumber: "Must be a number",
-                    }}
-                  />
+                  >
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                  </Control.select>
                 </Col>
               </Row>
               <Row className="form-group">
-                <Label htmlFor="author " md={2}>
+                <Label htmlFor="author " md={12}>
                   Your Name
                 </Label>
                 <Col>
@@ -115,10 +106,10 @@ class CommentForm extends React.Component {
                 </Col>
               </Row>
               <Row className="form-group">
-                <Label htmlFor="comment" md={2}>
+                <Label htmlFor="comment" md={12}>
                   Comment
                 </Label>
-                <Col md={6}>
+                <Col md={12}>
                   <Control.textarea
                     model=".comment"
                     id="comment"
