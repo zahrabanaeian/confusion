@@ -8,8 +8,8 @@ import {
   Media,
 } from "reactstrap";
 import { Link } from "react-router-dom";
-import { baseUrl } from '../shared/baseUrl';
-import { FadeTransform } from 'react-animation-components';
+import { baseUrl } from "../shared/baseUrl";
+import { FadeTransform } from "react-animation-components";
 
 const About = ({ leaders, isLoading, errMess }) => {
   return (
@@ -35,7 +35,7 @@ const About = ({ leaders, isLoading, errMess }) => {
             of world fusion cuisine that can be found nowhere else, it enjoys
             patronage from the A-list clientele in Hong Kong. Featuring four of
             the best three-star Michelin chefs in the world, you never know what
-            will arrive on your plate the next time you visit us.
+            will arrive on your plate the next time you visit us. zahra
           </p>
           <p>
             The restaurant traces its humble beginnings to{" "}
@@ -88,9 +88,11 @@ const About = ({ leaders, isLoading, errMess }) => {
           <h2>Corporate Leadership</h2>
         </div>
         <div className="col-12">
-          <RenderLeader leaders={leaders} 
-          isLoading={leaders.leadersLoading}
-          errMess={leaders.leadersErrMess}/>
+          <RenderLeader
+            leaders={leaders}
+            isLoading={leaders.leadersLoading}
+            errMess={leaders.leadersErrMess}
+          />
         </div>
       </div>
     </div>
@@ -99,22 +101,27 @@ const About = ({ leaders, isLoading, errMess }) => {
 
 function RenderLeader({ leaders }) {
   if (leaders != null) {
-    return leaders.leaders.map(leader => (
+    return leaders.leaders.map((leader) => (
       <FadeTransform
-      in
-      transformProps={{
-          exitTransform: 'scale(0.5) translateY(-50%)'
-      }}>
-      <Media className="my-5">
-        <Media className="mx-5" left>
-          <Media object src={baseUrl +leader.image} alt="Generic placeholder image" />
+        in
+        transformProps={{
+          exitTransform: "scale(0.5) translateY(-50%)",
+        }}
+      >
+        <Media className="my-5">
+          <Media className="mx-5" left>
+            <Media
+              object
+              src={baseUrl + leader.image}
+              alt="Generic placeholder image"
+            />
+          </Media>
+          <Media right body>
+            <Media heading>{leader.name}</Media>
+            <Media>{leader.designation}</Media>
+            <Media className="mt-3">{leader.description}</Media>
+          </Media>
         </Media>
-        <Media right body>
-          <Media heading>{leader.name}</Media>
-          <Media>{leader.designation}</Media>
-          <Media className="mt-3">{leader.description}</Media>
-        </Media>
-      </Media>
       </FadeTransform>
     ));
   } else {
