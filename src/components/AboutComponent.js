@@ -8,8 +8,10 @@ import {
   Media,
 } from "reactstrap";
 import { Link } from "react-router-dom";
+import { baseUrl } from '../shared/baseUrl';
+import { FadeTransform } from 'react-animation-components';
 
-const About = ({ leaders }) => {
+const About = ({ leaders, isLoading, errMess }) => {
   return (
     <div className="container">
       <div className="row">
@@ -86,7 +88,9 @@ const About = ({ leaders }) => {
           <h2>Corporate Leadership</h2>
         </div>
         <div className="col-12">
-          <RenderLeader leaders={leaders} />
+          <RenderLeader leaders={leaders} 
+          isLoading={leaders.leadersLoading}
+          errMess={leaders.leadersErrMess}/>
         </div>
       </div>
     </div>
@@ -95,10 +99,15 @@ const About = ({ leaders }) => {
 
 function RenderLeader({ leaders }) {
   if (leaders != null) {
-    return leaders.map(leader => (
+    return leaders.leaders.map(leader => (
+      <FadeTransform
+      in
+      transformProps={{
+          exitTransform: 'scale(0.5) translateY(-50%)'
+      }}>
       <Media className="my-5">
         <Media className="mx-5" left>
-          <Media object src={leader.image} alt="Generic placeholder image" />
+          <Media object src={baseUrl +leader.image} alt="Generic placeholder image" />
         </Media>
         <Media right body>
           <Media heading>{leader.name}</Media>
@@ -106,6 +115,7 @@ function RenderLeader({ leaders }) {
           <Media className="mt-3">{leader.description}</Media>
         </Media>
       </Media>
+      </FadeTransform>
     ));
   } else {
     return <div></div>;
